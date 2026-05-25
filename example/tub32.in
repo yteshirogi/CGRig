@@ -1,0 +1,50 @@
+##############################
+# RUN CONFIG
+variable T           equal 303.15
+variable DT          equal 1000.0
+variable TOTALSTEP   equal 20000000
+variable DUMPSTEP    equal 1000
+variable RESTARTSTEP equal 1000000
+# VARIABLE
+variable temperature equal ${T}
+variable kT          equal 0.00198720425864083*${temperature}
+variable coulcut     equal 35.0
+variable celsius     equal ${temperature}-273.15
+variable eps         equal 87.740-0.40008*${celsius}+(9.398e-4)*${celsius}^2-(1.410e-6)*${celsius}^3
+variable eps0        equal 8.854187817e-12
+variable kb          equal 1.38064852e-23
+variable e           equal 1.60217662e-19
+variable NA          equal 6.02214076e23
+variable saltcon     equal 0.15
+variable lambd       equal (${eps}*${eps0}*${kb}*${temperature}/(2*${e}^2*${NA}*${saltcon}*1000.0))^0.5*(1.0e10)
+variable debye_length equal 1.0/${lambd}
+##############################
+
+
+units           real
+atom_style      full
+boundary        p p p
+
+read_data      ${DATA}
+
+neighbor 5.0 bin
+neigh_modify delay 20 every 10 check yes
+neigh_modify exclude molecule/intra all
+neigh_modify page 2000000 one 20000
+
+dielectric      ${eps}
+pair_style      hybrid/overlay soft 0.0 table linear 5000 coul/debye ${debye_length} ${coulcut}
+pair_coeff      * * coul/debye
+include         ff/mt_nvt_gauss/gauss_table.in
+include         ff/mt_nvt_gauss/gauss_fm8_soft2.in
+include         ff/mt_nvt_gauss/gauss_fm8_soft_zero_native.in
+
+fix             RIG all bd/rigid hydropro ${MODE} ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ${kT} ${SEED}
+
+timestep        ${DT}
+dump            D all dcd ${DUMPSTEP} ${OUTDCD}
+dump_modify     D unwrap no
+dump_modify     D sort id
+
+restart         ${RESTARTSTEP} ${OUTRESTART}.*.restart
+run             ${TOTALSTEP}
