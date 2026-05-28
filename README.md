@@ -8,3 +8,8 @@ This is the LAMMPS plugin used in below:
 
 Then, you can use our simulation method as `fix bd/rigid`
 
+## Performance tips
+
+If you want a better performance, you can convert `gauss/cut` interaction (native contact term) to `table` interaction because `gauss/cut` is not implemented in the KOKKOS acceleration package but `table` is implemented in KOKKOS manner.
+
+
