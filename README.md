@@ -38,6 +38,22 @@ make install
 
 Then, you can use our simulation method as `fix bd/rigid`.
 
+## How to run
+
+For example, run for 16 tubulin-dimer system using KOKKOS acceleration:
+```
+lmp \
+  -k on g 1 t 72 -sf kk -pk kokkos newton on neigh half \
+  -in tub32.in \
+  -l tub32.log \
+  -var DATA tub32.data \
+  -var SEED 12345 \
+  -var OUTDCD tub32.dcd \
+  -var OUTRESTART restart \
+  -var MODE full
+```
+
+
 ## Performance tips
 
 If you want a better performance, you can convert `gauss/cut` interaction (native contact term) to `table` interaction because `gauss/cut` is not implemented in the KOKKOS acceleration package but `table` is implemented in KOKKOS manner.
