@@ -28,7 +28,7 @@ cmake ../cmake \
  -DPKG_EXTRA-DUMP=yes \
  -DPKG_EXTRA-PAIR=yes \
  -DBUILD_SHARED_LIBS=yes \
- -DCMAKE_CXX_FLAGS="-I/work/gw43/w43008/apps/eigen3/include/eigen3" \
+ -DCMAKE_CXX_FLAGS="-IYOUR_EIGEN_PATH/include/eigen3" \
  -DPKG_KOKKOS=yes \
  -DKokkos_ENABLE_OPENMP=yes \
  -DPKG_EXTRA-FIX=yes
