@@ -35,9 +35,9 @@ neigh_modify page 2000000 one 20000
 dielectric      ${eps}
 pair_style      hybrid/overlay soft 0.0 table linear 5000 coul/debye ${debye_length} ${coulcut}
 pair_coeff      * * coul/debye
-include         ff/mt_nvt_gauss/gauss_table.in
-include         ff/mt_nvt_gauss/gauss_fm8_soft2.in
-include         ff/mt_nvt_gauss/gauss_fm8_soft_zero_native.in
+include         gauss_table.in
+include         gauss_fm8_soft2.in
+include         gauss_fm8_soft_zero_native.in
 
 fix             RIG all bd/rigid hydropro ${MODE} ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ussomo_nvt/mt/6evw_a_hydro.dat ussomo_nvt/mt/6evw_b_hydro.dat ${kT} ${SEED}
 
