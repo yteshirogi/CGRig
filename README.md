@@ -16,7 +16,7 @@ mkdir build
 cd build
 
 cmake ../cmake \
- -DCMAKE_INSTALL_PREFIX=/work/gw43/w43008/apps/lammps/22Jul2025_cgrig_kokkos \
+ -DCMAKE_INSTALL_PREFIX=/PATH/TO/YOUR/DESTINATION/22Jul2025_cgrig_kokkos \
  -DCMAKE_C_COMPILER=gcc \
  -DCMAKE_CXX_COMPILER=g++ \
  -DCMAKE_Fortran_COMPILER=gfortran \
